@@ -7,12 +7,20 @@ require_relative './models/peep'
 
 
 class Chitter < Sinatra::Base
+  enable :sessions
 
   get '/' do
+    @peeps = Peep.all 
+    erb :feed
+  end
+
+  get '/peep' do
     erb :peeps
   end
 
   post '/peeps' do
+    peep = Peep.new(message: params[:message])
+    peep.save
     redirect '/'
   end
 
