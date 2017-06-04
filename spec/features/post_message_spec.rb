@@ -4,13 +4,14 @@
 
 feature "Posting messages or 'peeps' to chitter" do
   scenario 'I can post a message to chitter' do
-    visit_page('/')
-    fill_in 'peep', with: "Hello, world"
+    visit('/')
+    fill_in 'message', with: "Hello, world"
     click_button 'Peep it!'
 
     expect(current_path).to eq '/'
 
     within 'ul#peeps' do
       expect(page).to have_content('Hello, world')
+    end
   end
 end
